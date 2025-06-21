@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Proyek - Animasi Walkthrough Rumah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 900px; /* Batas lebar maksimum video */
+            margin: 20px auto;
+            background-color: #000;
+             border-radius: 8px;
+             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .header-video {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+        }
+        .header-video h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .description-video {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4F46E5; /* Indigo */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #4338CA;
+        }
+         .footer-video {
+            background-color: #333;
+            color: #aaa;
+            text-align: center;
+            padding: 15px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-video">
+        <h1>Animasi Walkthrough Rumah Impian</h1>
+    </header>
+
+    <div class="video-container">
+        <!-- Jika video dari YouTube, gunakan iframe (ganti SRC dengan embed URL Anda) -->
+        <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID_ANDA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+        
+        <!-- Jika video file MP4, gunakan tag <video> (ganti SRC dengan path ke file video Anda) -->
+        <video controls poster="https://placehold.co/900x506/333/ccc?text=Poster+Video+Anda">
+            <source src="Bersama Mitra Suaka Gemilang-1.mp4" type="video/mp4">
+            Browser Anda tidak mendukung tag video.
+        </video>
+    </div>
+
+    <div class="description-video">
+        <h2 class="text-2xl font-semibold mb-3 text-gray-800">Tentang Video Ini</h2>
+        <p class="text-gray-700 leading-relaxed">
+            Video ini menampilkan tur virtual (walkthrough) dari sebuah desain rumah modern yang elegan. Anda dapat melihat detail setiap ruangan dan bagaimana pencahayaan serta material berinteraksi untuk menciptakan suasana yang nyaman.
+            <!-- Tambahkan deskripsi lebih detail di sini -->
+        </p>
+         <div class="text-center">
+            <a href="index.html" class="back-button">Kembali ke Portfolio</a>
+        </div>
+    </div>
+    
+    <footer class="footer-video">
+        <p>&copy; <span id="currentYearVideo"></span> Portofolio D. Solichan</p>
+    </footer>
+
+    <script>
+        document.getElementById('currentYearVideo').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

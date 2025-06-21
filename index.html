@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POPTOFOLIO - Desainer Arsitektur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(44, 43, 43, 0.5), #38373780), url('backround.png'); /* Pastikan image.png ada di folder yang sama atau ganti path */
+            background-size: cover;
+            background-position: center;
+        }
+        .section-title {
+            @apply text-3xl font-bold text-center mb-10 text-gray-800;
+        }
+        .card {
+            @apply bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105;
+        }
+        .contact-form input, .contact-form textarea {
+            @apply w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors;
+        }
+        .social-icon {
+            @apply text-2xl text-gray-600 hover:text-indigo-600 transition-colors duration-300;
+        }
+        .nav-link {
+             @apply px-3 py-2 text-gray-300 hover:text-white hover:bg-indigo-700 rounded-md transition-colors duration-300 text-sm;
+        }
+        .skill-item {
+            @apply bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium shadow flex items-center space-x-2; /*rumah*/
+        }
+        .skill-logo {
+            width: 20px; /* Ukuran logo */
+            height: 100px; /* Ukuran logo */
+            object-fit: contain; /* Memastikan logo tidak terdistorsi */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header / Navigation -->
+    <header class="bg-indigo-600 text-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-xl font-bold">Portofolio</a> <!-- Ganti href="#" dengan index.html -->
+            <nav class="hidden md:flex space-x-1">
+                <a href="#tentang" class="nav-link">Tentang Saya</a>
+                <a href="#keahlian" class="nav-link">Keahlian</a>
+                <a href="#layanan" class="nav-link">Layanan</a>
+                <a href="#portfolio" class="nav-link">Galeri 2D</a>
+                <a href="#galeri-360" class="nav-link">Galeri 360</a>
+                <a href="#proyek-3d"nav-link">Viewewr 3D</a>
+                <a href="#video-proyek" class="nav-link">Video Proyek</a>
+                <a href="#kontak" class="nav-link">Kontak</a>
+            </nav>
+            <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-indigo-700">
+               <a href="#tentang" class="block px-6 py-3 text-white hover:bg-indigo-800">Tentang Saya</a>
+               <a href="#keahlian" class="block px-6 py-3 text-white hover:bg-indigo-800">Keahlian</a>
+               <a href="#layanan" class="block px-6 py-3 text-white hover:bg-indigo-800">Layanan</a>
+               <a href="#portfolio" class="block px-6 py-3 text-white hover:bg-indigo-800">Galeri 2D</a>
+               <a href="#galeri-360" class="block px-6 py-3 text-white hover:bg-indigo-800">Galeri 360</a>
+               <a href="#video-proyek" class="block px-6 py-3 text-white hover:bg-indigo-800">Video Proyek</a>
+               <a href="#kontak" class="block px-6 py-3 text-white hover:bg-indigo-800">Kontak</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-screen flex items-center justify-center text-white pt-16">
+        <div class="text-center bg-black bg-opacity-60 p-10 rounded-xl">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">Solichan</h1>
+            <p class="text-xl md:text-2xl mb-8">Desainer 3D Arsitek & Layout</p>
+            <a href="#kontak" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors duration-300">Hubungi Saya</a>
+        </div>
+    </section>
+
+    <!-- Tentang Saya Section -->
+    <section id="tentang" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Tentang Saya</h2>
+            <div class="max-w-3xl mx-auto text-center text-gray-700 leading-relaxed">
+                <img src="foto/saya.jpg" alt="Foto Profil" class="w-40 h-40 rounded-full mx-auto mb-6 shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/e2e8f0/333?text=Foto+Tidak+Tersedia';">
+                <p class="text-lg">
+                    Halo! Saya seorang desainer 3D arsitek dan layout dengan pengalaman dalam menciptakan visualisasi arsitektur yang menakjubkan dan fungsional. Saya bersemangat tentang bagaimana desain dapat membentuk ruang dan meningkatkan kualitas hidup.
+                </p>
+                <p class="mt-4 text-lg">
+                    Keahlian saya meliputi pemodelan 3D detail, perhitungan Rencana Anggaran Biaya (RAB) yang akurat, analisis struktur untuk memastikan keamanan dan kelayakan bangunan, serta pembuatan rendering fotorealistik untuk presentasi proyek. Saya berkomitmen untuk memberikan solusi desain terbaik yang memenuhi kebutuhan dan ekspektasi klien.
+                </p>
+                <a href="tentang-detail.html" class="mt-6 inline-block bg-indigo-500 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">Baca Lebih Lanjut</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keahlian Section -->
+    <section id="keahlian" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Keahlian Teknis Saya</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Saya mahir dalam menggunakan berbagai perangkat lunak standar industri untuk mewujudkan visi desain Anda.</p>
+            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 max-w-3xl mx-auto">
+                <span class="skill-item">
+                    <img src="https://www.vectorlogo.zone/logos/autodesk_autocad/autodesk_autocad-icon.svg" alt="Logo AutoCAD" class="skill-logo" onerror="this.onerror=null;this.src='https://placehold.co/24x24/EF4444/FFFFFF?text=CAD';this.alt='Logo AutoCAD tidak tersedia';">
+                    <span>AutoCAD</span>
+                </span>
+                <span class="skill-item">
+                    <img src="https://www.vectorlogo.zone/logos/sketchup/sketchup-icon.svg" alt="Logo SketchUp" class="skill-logo" onerror="this.onerror=null;this.src='https://placehold.co/24x24/E22428/FFFFFF?text=SU';this.alt='Logo SketchUp tidak tersedia';">
+                    <span>SketchUp</span>
+                </span>
+                <span class="skill-item">
+                     <img src="https://www.vectorlogo.zone/logos/lumion/lumion-icon.svg" alt="Logo Lumion" class="skill-logo" onerror="this.onerror=null;this.src='https://placehold.co/24x24/00AEEF/FFFFFF?text=LU';this.alt='Logo Lumion tidak tersedia';">
+                    <span>Lumion</span>
+                </span>
+                <span class="skill-item">
+                    <img src="https://www.vectorlogo.zone/logos/enscape/enscape-icon.svg" alt="Logo Enscape" class="skill-logo" onerror="this.onerror=null;this.src='https://placehold.co/24x24/FF6B00/FFFFFF?text=EN';this.alt='Logo Enscape tidak tersedia';">
+                    <span>Enscape</span>
+                </span>
+                <span class="skill-item">
+                    <img src="https://www.vectorlogo.zone/logos/chaosgroup_vray/chaosgroup_vray-icon.svg" alt="Logo V-Ray" class="skill-logo" onerror="this.onerror=null;this.src='https://placehold.co/24x24/1A90C9/FFFFFF?text=VR';this.alt='Logo V-Ray tidak tersedia';">
+                    <span>V-Ray</span>
+                </span>
+                <span class="skill-item">
+                    <i class="fas fa-file-excel text-green-600 text-xl"></i>
+                    <span>Microsoft Excel</span>
+                </span>
+                <span class="skill-item">
+                    <img src="https://www.vectorlogo.zone/logos/adobe_photoshop/adobe_photoshop-icon.svg" alt="Logo Adobe Photoshop" class="skill-logo" onerror="this.onerror=null;this.src='https://placehold.co/24x24/31A8FF/FFFFFF?text=PS';this.alt='Logo Photoshop tidak tersedia';">
+                    <span>Adobe Photoshop</span>
+                </span>
+            </div>
+        </div>
+    </section>
+
+
+    <!<!-- Layanan Section -->
+<section id="layanan" class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+        <h2 class="section-title">Layanan Profesional Saya</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Card 1: Desain 3D -->
+            <div class="card text-center p-6">
+                <div class="text-indigo-500 mb-4">
+                    <i class="fas fa-cubes fa-3x"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2 text-gray-800">Desain 3D Arsitektur</h3>
+                <p class="text-gray-600 text-sm">Pemodelan 3D bangunan dan ruang interior/eksterior dengan detail tinggi.</p>
+            </div>
+            
+            <!-- Card 2: Hitung RAB (Ini yang berubah menjadi link) -->
+            <a href="RAB OTOMATIS/RAB OTOMATIS.html" class="card text-center p-6">
+                <div class="text-indigo-500 mb-4">
+                    <i class="fas fa-calculator fa-3x"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2 text-gray-800">Hitung RAB</h3>
+                <p class="text-gray-600 text-sm">Perhitungan Rencana Anggaran Biaya proyek secara akurat dan transparan "Silahkan coba Aplikasi sederhana saya".</p>
+            </a>
+            
+
+            <!-- Card 3: Analisa Struktur -->
+            <div class="card text-center p-6">
+                <div class="text-indigo-500 mb-4">
+                    <i class="fas fa-drafting-compass fa-3x"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2 text-gray-800">Analisa Struktur</h3>
+                <p class="text-gray-600 text-sm">Analisis kekuatan dan kelayakan struktur bangunan.</p>
+            </div>
+            
+            <!-- Card 4: Rendering -->
+            <div class="card text-center p-6">
+                <div class="text-indigo-500 mb-4">
+                    <i class="fas fa-camera-retro fa-3x"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2 text-gray-800">Rendering Fotorealistik</h3>
+                <p class="text-gray-600 text-sm">Pembuatan visualisasi gambar dan animasi 3D yang realistis untuk presentasi.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Galeri Proyek 2D</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Berikut adalah beberapa contoh proyek desain dan rendering 2D yang pernah saya kerjakan. Klik untuk melihat galeri foto.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Proyek 1: Rumah Modern -->
+                <div class="card">
+                    <img src="foto/subang 2.jpg" alt="Proyek Rumah Modern" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gambar+Tidak+Tersedia';">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Desain Rumah Modern Minimalis</h3>
+                        <p class="text-gray-600 text-sm mb-4">Konsep rumah tinggal modern dengan fokus pada fungsionalitas dan estetika minimalis.</p>
+                        <a href="galeri rumah modern.html" class="text-indigo-500 hover:text-indigo-700 font-medium">Lihat Galeri Foto <i class="fas fa-images text-xs ml-1"></i></a>
+                    </div>
+                </div>
+                <!-- Proyek 2: Interior Kantor -->
+                <div class="card">
+                    <img src="foto/GAMBAR INTERIOR 1.jpg" alt="Proyek Interior Kantor" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gambar+Tidak+Tersedia';">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Desain Interior Kantor Startup</h3>
+                        <p class="text-gray-600 text-sm mb-4">Tata ruang kantor yang kolaboratif dan inspiratif untuk perusahaan teknologi.</p>
+                        <a href="galeri interior kantor.html" class="text-indigo-500 hover:text-indigo-700 font-medium">Lihat Galeri Foto <i class="fas fa-images text-xs ml-1"></i></a>
+                    </div>
+                </div>
+                <!-- Proyek 3: Eksterior Ruko -->
+                <div class="card">
+                    <img src="foto/daya motor.png" alt="Proyek Komersial" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gambar+Tidak+Tersedia';">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Visualisasi Eksterior Ruko</h3>
+                        <p class="text-gray-600 text-sm mb-4">Rendering 3D eksterior untuk kompleks ruko komersial di pusat kota.</p>
+                        <a href="galeri exterior ruko.html" class="text-indigo-500 hover:text-indigo-700 font-medium">Lihat Galeri Foto <i class="fas fa-images text-xs ml-1"></i></a>
+                    </div>
+                </div>
+                 <!-- Anda bisa menambahkan lebih banyak proyek di sini dengan struktur yang sama -->
+            </div>
+        </div>
+    </section>
+
+    <section id="proyek-3d">
+            <h2>Koleksi Desain 3D Interaktif</h2>
+            <div class="galeri-3d">
+
+
+                <div class="item-3d">
+                    <a href="\3d viewer\viewer-3d.html">
+                        <img src="thumbnails/rumah-modern.jpg" alt="Thumbnail Desain Rumah Modern">
+                        <h3>Desain Rumah Modern Minimalis</h3>
+                        <p>Klik untuk menjelajahi secara interaktif.</p>
+                    </a>
+                </div>
+
+                <div class="item-3d">
+                    <a href="\3d viewer\viewer-3d.html">
+                        <img src="thumbnails/apartemen-studio.jpg" alt="Thumbnail Desain Apartemen Studio">
+                        <h3>Apartemen Studio Compact</h3>
+                        <p>Klik untuk menjelajahi secara interaktif.</p>
+                    </a>
+                </div>
+
+                </div>
+        </section>
+
+    <!-- Galeri 360 Section -->
+      <section id="galeri-360" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Galeri Interaktif 360°</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Jelajahi desain arsitektur saya dalam format 360 derajat yang imersif. Klik untuk melihat detail.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- KARTU UNTUK PROYEK PANORAMA INTER360 ANDA -->
+                <div class="card">
+                    <!-- Ganti src dengan path ke thumbnail panorama Anda -->
+                    <img src="foto/452581600_1010519630523559_6134654619253952103_n.jpg" alt="Pratinjau 360 Interior Apartemen" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gagal+Muat';">
+                    <div class="p-6">
+                        <!-- Ganti judul dan deskripsi sesuai proyek Anda -->
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Interior Kamar & Ruang Tamu (360°)</h3>
+                        <p class="text-gray-600 text-sm mb-4">Rasakan pengalaman imersif menjelajahi interior apartemen modern ini.</p>
+                        
+                        <!-- INI TAUTANNYA -->
+                        <!-- Pastikan path ini sesuai dengan struktur folder dan nama file Anda -->
+                        <a href="360interior.html" class="text-indigo-500 hover:text-indigo-700 font-medium">
+                            Lihat Tampilan 360° <i class="fas fa-vr-cardboard text-xs ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                 <div class="card">
+                    <!-- Ganti src dengan path ke thumbnail panorama Anda -->
+                    <img src="tampilan 360 inter/inter360.html" alt="Pratinjau 360 Interior Apartemen" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gagal+Muat';">
+                    <div class="p-6">
+                        <!-- Ganti judul dan deskripsi sesuai proyek Anda -->
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Interior Apartemen Modern (360°)</h3>
+                        <p class="text-gray-600 text-sm mb-4">Rasakan pengalaman imersif menjelajahi interior apartemen modern ini.</p>
+                        
+                        <!-- INI TAUTANNYA -->
+                        <!-- Pastikan path ini sesuai dengan struktur folder dan nama file Anda -->
+                        <a href="360 kamar.html" class="text-indigo-500 hover:text-indigo-700 font-medium">
+                            Lihat Tampilan 360° <i class="fas fa-vr-cardboard text-xs ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                 <div class="card">
+                    <!-- Ganti src dengan path ke thumbnail panorama Anda -->
+                    <img src="tampilan 360 inter/inter360.html" alt="Pratinjau 360 Interior Apartemen" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gagal+Muat';">
+                    <div class="p-6">
+                        <!-- Ganti judul dan deskripsi sesuai proyek Anda -->
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Interior Apartemen Modern (360°)</h3>
+                        <p class="text-gray-600 text-sm mb-4">Rasakan pengalaman imersif menjelajahi interior apartemen modern ini.</p>
+                        
+                        <!-- INI TAUTANNYA -->
+                        <!-- Pastikan path ini sesuai dengan struktur folder dan nama file Anda -->
+                        <a href="360 kantor.html" class="text-indigo-500 hover:text-indigo-700 font-medium">
+                            Lihat Tampilan 360° <i class="fas fa-vr-cardboard text-xs ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- Kartu proyek 360 lainnya bisa ditambahkan di sini -->
+                <!-- ... -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Proyek Section -->
+    <section id="video-proyek" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Video Proyek & Animasi</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Saksikan visualisasi proyek saya dalam bentuk video dan animasi yang dinamis.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card">
+                    <img src="esprort.png" alt="esp" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gambar+Tidak+Tersedia';">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Animasi Walkthrough Rumah Impian</h3>
+                        <p class="text-gray-600 text-sm mb-4">Video tur virtual melalui desain rumah modern yang elegan.</p>
+                        <a href="video-walkthrough-rumah.html" class="text-indigo-500 hover:text-indigo-700 font-medium">Tonton Video <i class="fas fa-play-circle text-xs ml-1"></i></a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://placehold.co/600x400/38b2ac/333?text=Thumbnail+Video+Presentasi" alt="Thumbnail Video Presentasi Proyek" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gambar+Tidak+Tersedia';">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Presentasi Proyek Apartemen</h3>
+                        <p class="text-gray-600 text-sm mb-4">Video presentasi konsep desain untuk sebuah unit apartemen mewah.</p>
+                        <a href="video-presentasi-apartemen.html" class="text-indigo-500 hover:text-indigo-700 font-medium">Tonton Video <i class="fas fa-play-circle text-xs ml-1"></i></a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://placehold.co/600x400/ed64a6/333?text=Thumbnail+Video+Tutorial" alt="Thumbnail Video Tutorial Desain" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gambar+Tidak+Tersedia';">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Tutorial Singkat Proses Desain</h3>
+                        <p class="text-gray-600 text-sm mb-4">Cuplikan video yang menunjukkan tahapan dalam proses desain 3D.</p>
+                        <a href="video-tutorial-desain.html" class="text-indigo-500 hover:text-indigo-700 font-medium">Tonton Video <i class="fas fa-play-circle text-xs ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="kontak" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Hubungi Saya</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Tertarik untuk berdiskusi mengenai proyek Anda? Jangan ragu untuk menghubungi saya.</p>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="space-y-6 contact-form">
+                    <input type="hidden" name="_to" value="dsolichan@gmail.com">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Anda</label>
+                        <input type="text" name="name" id="name" required placeholder="Nama Lengkap">
+                    </div>
+                    <div>
+                        <label for="email_pengirim" class="block text-sm font-medium text-gray-700 mb-1">Alamat Email Anda</label>
+                        <input type="email" name="email_pengirim" id="email_pengirim" required placeholder="email@anda.com">
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subjek Pesan</label>
+                        <input type="text" name="subject" id="subject" required placeholder="Contoh: Permintaan Desain Rumah">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Pesan Anda</label>
+                        <textarea name="message" id="message" rows="4" required placeholder="Tuliskan detail kebutuhan atau pertanyaan Anda..."></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 text-lg">
+                            Kirim Pesan
+                        </button>
+                    </div>
+                </form>
+                <div class="mt-10 text-center">
+                    <p class="text-gray-700 mb-4 font-medium">Atau hubungi saya langsung melalui:</p>
+                    <div class="flex justify-center space-x-6">
+                        <a href="https://wa.me/6289663363038?text=Hallo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20jasa%20desain%20Anda." target="_blank" class="social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://web.facebook.com/solic689" target="_blank" class="social-icon" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/solichan-s-a04383266?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B94XHc%2FZUSvKHPnnfUfNGMA%3D%3D" target="_blank" class="social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="YOUR_INSTAGRAM_PROFILE_URL" target="_blank" class="social-icon" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <p class="mt-6 text-sm text-gray-600">
+                        Nomor WhatsApp: <a href="tel:+6289663363038" class="text-indigo-600 hover:underline">0896-6336-3038</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-10 text-center">
+        <div class="container mx-auto px-6">
+            <p>&copy; <span id="currentYear"></span> Portofolio D. Solichan. Semua hak dilindungi.</p>
+            <p class="text-sm mt-2">Dirancang dengan <i class="fas fa-heart text-red-500"></i> menggunakan Tailwind CSS</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const mobileNavLinks = mobileMenu.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerOffset = document.querySelector('header').offsetHeight; 
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - headerOffset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>

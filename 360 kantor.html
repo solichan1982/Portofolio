@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta property="og:image" content="https://placehold.co/1200x630/2c3e50/ffffff?text=Panorama+360">
+    <meta name="description" content="Jelajahi panorama 360 derajat yang menakjubkan ini. Nikmati pengalaman visual yang imersif dan cerita yang dihasilkan AI. Halaman ini dapat digulir untuk konten tambahan.">
+    <title>Penampil Panorama 360 Interaktif dengan Cerita AI</title>
+    <style>
+        /* Gaya dasar untuk keseluruhan halaman */
+        body {
+            font-family: 'Verdana', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            display: flex; /* Menggunakan flexbox untuk tata letak utama */
+            flex-direction: column; /* Mengatur item secara vertikal */
+            min-height: 100vh; /* Minimal mengisi seluruh tinggi viewport, memungkinkan footer di bawah jika konten sedikit */
+            /* overflow: hidden; DIHAPUS untuk memungkinkan scroll */
+            /* height: 100vh; DIHAPUS untuk memungkinkan scroll */
+        }
+
+        /* Wadah untuk deskripsi */
+        .container-deskripsi {
+            text-align: center;
+            padding: 20px 15px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ddd;
+            position: relative; 
+            z-index: 10; 
+            flex-shrink: 0; /* Mencegah kontainer deskripsi menyusut saat body adalah flex container */
+        }
+
+        .container-deskripsi h1 {
+            margin-top: 0; 
+            margin-bottom: 10px; 
+            color: #2c3e50; 
+            font-size: 1.5em; 
+        }
+
+        .container-deskripsi p {
+            max-width: 700px; 
+            margin: 0 auto 15px auto;
+            font-size: 0.9em; 
+        }
+
+        #generateStoryBtn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom:10px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #generateStoryBtn:hover { background-color: #2980b9; }
+        #generateStoryBtn:active { transform: scale(0.98); }
+
+        /* Area untuk output cerita AI */
+        #storyOutputArea {
+            padding: 15px;
+            margin:0; /* Hapus margin jika ada */
+            background-color: #eaf5ff;
+            border-bottom: 1px solid #cce0ff;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        #storyOutputArea p { max-width: 700px; margin: 0 auto; font-size: 0.95em; color: #333; }
+        #storyOutputArea p.loading-text { color: #555; font-style: italic; }
+        #storyOutputArea p.error-text { color: #c0392b; font-weight: bold; }
+        #storyOutputArea p.ai-story { line-height: 1.7; color: #2c3e50; }
+
+        /* Wadah untuk penampil panorama */
+        #panorama-wrapper {
+            width: 100%;
+            /* flex-grow: 1; DIHAPUS/DIGANTI */
+            height: 70vh; /* Tinggi panorama diatur, misal 70% dari tinggi viewport. Sesuaikan sesuai kebutuhan. */
+            /* min-height: 400px;  Bisa juga menggunakan min-height jika perlu */
+            position: relative; 
+            overflow: hidden; 
+            background-color: #000; /* Latar belakang hitam untuk viewer jika ada spasi */
+            flex-shrink: 0; /* Penting agar tidak menyusut jika konten lain banyak */
+        }
+
+        #panoStudioViewerID {
+            position: absolute; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Area untuk Konten Tambahan */
+        .additional-content {
+            padding: 20px;
+            background-color: #fff; /* Memberi latar belakang berbeda */
+            border-top: 1px solid #eee; /* Garis pemisah halus */
+            border-bottom: 1px solid #eee;
+            text-align: center;
+            /* flex-grow: 1; Jika ingin bagian ini mengisi sisa ruang, namun body bukan lagi fixed height */
+        }
+        .additional-content h2 {
+            color: #34495e;
+            margin-top:0;
+        }
+        .additional-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .additional-content ul li {
+            margin-bottom: 10px;
+        }
+        .additional-content ul li a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .additional-content ul li a:hover {
+            color: #2980b9;
+        }
+
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c3e50; /* Warna gelap untuk footer */
+            color: #ecf0f1; /* Warna teks terang untuk footer */
+            flex-shrink: 0; /* Mencegah footer menyusut */
+            margin-top: auto; /* Mendorong footer ke bawah jika body adalah flex container dan konten sedikit */
+        }
+        footer a {
+            color: #3498db; /* Warna link yang kontras */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Area untuk menampilkan deskripsi panorama -->
+    <div class="container-deskripsi">
+        <h1>Selamat Datang di Tur Virtual Kami</h1>
+        <p>Nikmati pemandangan 360 derajat yang imersif dari lokasi ini. Gunakan mouse atau sentuhan Anda untuk menjelajahi setiap sudut. Selamat menikmati!</p>
+        <button id="generateStoryBtn">✨ Buat Cerita Pemandangan Ini</button>
+    </div>
+
+    <!-- Area untuk menampilkan output dari Gemini -->
+    <div id="storyOutputArea" style="display: none;">
+        <!-- Konten cerita akan ditampilkan di sini -->
+    </div>
+
+    <!-- Wadah utama untuk panorama -->
+    <div id="panorama-wrapper">
+        <noscript>
+            <div style="color: red; width: 100%; text-align:center; border: 1px solid red; padding: 20px; font-family: sans-serif; background-color: #fff0f0;">
+                GALAT: Browser web Anda harus mengaktifkan JavaScript untuk menampilkan panorama ini.
+            </div>
+        </noscript>
+        <div id="panoStudioViewerID">
+            <!-- Konten panorama akan dimasukkan di sini oleh JavaScript. -->
+        </div>
+    </div>
+
+    <!-- Area untuk Konten Tambahan (misalnya, tautan lain atau panorama lain) -->
+    <div class="additional-content">
+        <h2>Proyek Lainnya & Tautan Berguna</h2>
+        <p>Di sini Anda dapat menambahkan tautan ke proyek lain, halaman web, atau bahkan menyematkan lebih banyak panorama.</p>
+        <ul>
+            <li><a href="#placeholder-link1">Contoh Tautan Proyek 1</a></li>
+            <li><a href="#placeholder-link2">Contoh Tautan Artikel Terkait</a></li>
+            <li><p><em>(Anda bisa menambahkan file panorama lain di sini dengan struktur serupa)</em></p></li>
+        </ul>
+    </div>
+
+    <!-- Footer dengan tautan kembali ke portofolio -->
+    <footer>
+        <p><a href="Index.html" target="_blank" rel="noopener noreferrer">Kembali ke Portofolio Utama Saya</a></p>
+        <p>&copy; <span id="currentYear"></span> Nama Anda atau Nama Proyek. Hak Cipta Dilindungi.</p>
+    </footer>
+        
+    <script type="text/javascript" src="panoStudioViewer.js"></script>
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', function() {
+            const viewerElement = document.getElementById('panoStudioViewerID');
+            const errorMessageBase = '<div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%; padding:20px; box-sizing:border-box;">' +
+                                     '<p style="color:red; text-align:center; font-size:1.1em; margin-bottom:10px;"><b>Tidak dapat memuat penampil panorama.</b></p>';
+            const checkFileMessage = '<p style="font-size:0.9em; color:gray; text-align:center; max-width: 400px;">Pastikan berkas \'panoStudioViewer.js\' dan \'inter360.json\' berada di direktori yang sama dengan berkas HTML ini dan tidak ada kesalahan pada skrip tersebut.</p></div>';
+
+            if (!viewerElement) {
+                console.error("GALAT Kritis: Elemen target 'panoStudioViewerID' tidak ditemukan di DOM. Panorama tidak dapat dimuat.");
+                const bodyError = document.createElement('div');
+                bodyError.innerHTML = '<p style="color:red; text-align:center; padding:30px; font-size:1.2em;"><b>Kesalahan konfigurasi halaman: Elemen penampil panorama tidak ditemukan.</b></p>';
+                document.body.insertBefore(bodyError, document.body.firstChild); // Menampilkan di atas
+                return; 
+            }
+
+            if (typeof panoStudioViewer !== 'undefined' && panoStudioViewer && typeof panoStudioViewer.insert === 'function') {
+                try {
+                    panoStudioViewer.insert("panoStudioViewerID", "inter360.json", { html5: "disable_webgl_warning" });
+                } catch (e) {
+                    console.error("Kesalahan saat menginisialisasi PanoramaStudio Viewer:", e);
+                    viewerElement.innerHTML = errorMessageBase + '<p style="font-size:0.9em; color:gray; text-align:center;">Detail kesalahan: ' + e.message + '</p>' + checkFileMessage;
+                }
+            } else {
+                console.error("Objek 'panoStudioViewer' tidak terdefinisi. Ini biasanya berarti 'panoStudioViewer.js' tidak dimuat dengan benar atau mengalami galat saat dieksekusi.");
+                viewerElement.innerHTML = errorMessageBase + checkFileMessage;
+            }
+
+            // Logika untuk Fitur Cerita AI Gemini
+            const generateStoryBtn = document.getElementById('generateStoryBtn');
+            const storyOutputArea = document.getElementById('storyOutputArea');
+
+            if (generateStoryBtn && storyOutputArea) {
+                generateStoryBtn.addEventListener('click', async function() {
+                    storyOutputArea.style.display = 'block';
+                    storyOutputArea.innerHTML = '<p class="loading-text">Sedang membuat cerita untuk Anda... ✨</p>';
+
+                    const apiKey = ""; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    const promptText = "Anda adalah seorang pendongeng yang puitis. Saat ini Anda sedang melihat sebuah pemandangan panorama 360 derajat yang luar biasa indah dari sebuah tempat fiktif. Tuliskan deskripsi singkat yang puitis dan imajinatif (sekitar 3-5 kalimat) tentang apa yang Anda lihat dan rasakan. Buatlah seolah-olah pengguna benar-benar ada di sana.";
+                    const payload = { contents: [{ role: "user", parts: [{ text: promptText }] }] };
+
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            console.error('Gemini API error response:', errorData);
+                            throw new Error(`Gemini API request failed with status ${response.status}. ${errorData?.error?.message || 'Tidak ada detail tambahan.'}`);
+                        }
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const generatedText = result.candidates[0].content.parts[0].text;
+                            storyOutputArea.innerHTML = `<p class="ai-story">${generatedText.replace(/\n/g, '<br>')}</p>`;
+                        } else {
+                            console.error('Struktur respons Gemini API tidak seperti yang diharapkan:', result);
+                            throw new Error('Gagal mendapatkan konten cerita dari respons API.');
+                        }
+                    } catch (error) {
+                        console.error('Kesalahan saat mengambil cerita dari Gemini API:', error);
+                        storyOutputArea.innerHTML = `<p class="error-text">Maaf, terjadi kesalahan saat mencoba membuat cerita untuk Anda. (${error.message})</p>`;
+                    }
+                });
+            } else {
+                console.error("Tombol 'generateStoryBtn' atau area 'storyOutputArea' tidak ditemukan.");
+            }
+
+            // Set tahun sekarang di footer
+            const currentYearElement = document.getElementById('currentYear');
+            if (currentYearElement) {
+                currentYearElement.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Ganti judul ini sesuai dengan nama proyek -->
+    <title>Galeri Foto - Desain Rumah Modern Minimalis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tambahan CSS untuk Lightbox (jika digunakan) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+        }
+        .gallery-img {
+            @apply w-full h-64 object-cover rounded-lg shadow-md transform transition-all duration-300 hover:scale-105 cursor-pointer;
+        }
+        .header-galeri {
+            background-color: #4F46E5; /* Warna header Indigo */
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+         .header-galeri h1 {
+            margin: 0;
+            font-size: 2em;
+         }
+        .back-button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #4F46E5; /* Indigo */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #4338CA; /* Darker Indigo */
+        }
+         .footer-galeri {
+            background-color: #333;
+            color: #aaa;
+            text-align: center;
+            padding: 15px;
+            margin-top: auto; /* Mendorong footer ke bawah jika konten pendek */
+        }
+        /* Styling untuk Lightbox */
+        .lb-data .lb-caption {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .lb-data .lb-number {
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <header class="header-galeri">
+        <!-- Ganti judul ini sesuai dengan nama proyek -->
+        <h1>Galeri Foto: Desain Rumah Modern Minimalis</h1>
+    </header>
+
+    <main class="container mx-auto px-6 py-10 flex-grow">
+        <!-- Deskripsi Proyek (Opsional) -->
+        <div class="mb-10 text-center max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-gray-800 mb-3">Deskripsi Proyek</h2>
+            <p class="text-gray-700 leading-relaxed">
+                <!-- Ganti dengan deskripsi singkat proyek ini -->
+                Berikut adalah kumpulan gambar dari proyek desain rumah modern minimalis yang menampilkan berbagai sudut pandang dan detail desain. Proyek ini menekankan pada pemanfaatan ruang yang efisien, pencahayaan alami, dan estetika yang bersih serta elegan.
+            </p>
+        </div>
+
+        <!-- Grid Galeri Foto -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Ganti path gambar dan caption sesuai dengan proyek Anda -->
+            <!-- Gambar 1 -->
+            <a href="https://placehold.co/1200x800/a3bffa/333?text=Rumah+Modern+Tampak+Depan" data-lightbox="proyek-rumah-modern" data-title="Tampak Depan Rumah Modern">
+                <img src="https://placehold.co/600x400/a3bffa/333?text=Rumah+Modern+Tampak+Depan" alt="[Gambar Rumah Modern Tampak Depan]" class="gallery-img" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gagal+Muat';">
+            </a>
+            <!-- Gambar 2 -->
+            <a href="https://placehold.co/1200x800/a3bffa/333?text=Rumah+Modern+Ruang+Tamu" data-lightbox="proyek-rumah-modern" data-title="Interior Ruang Tamu">
+                <img src="https://placehold.co/600x400/a3bffa/333?text=Rumah+Modern+Ruang+Tamu" alt="[Gambar Interior Ruang Tamu Rumah Modern]" class="gallery-img" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gagal+Muat';">
+            </a>
+            <!-- Gambar 3 -->
+            <a href="https://placehold.co/1200x800/a3bffa/333?text=Rumah+Modern+Kamar+Tidur" data-lightbox="proyek-rumah-modern" data-title="Desain Kamar Tidur Utama">
+                <img src="https://placehold.co/600x400/a3bffa/333?text=Rumah+Modern+Kamar+Tidur" alt="[Gambar Desain Kamar Tidur Rumah Modern]" class="gallery-img" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gagal+Muat';">
+            </a>
+            <!-- Gambar 4 -->
+            <a href="https://placehold.co/1200x800/a3bffa/333?text=Rumah+Modern+Dapur" data-lightbox="proyek-rumah-modern" data-title="Area Dapur dan Ruang Makan">
+                <img src="https://placehold.co/600x400/a3bffa/333?text=Rumah+Modern+Dapur" alt="[Gambar Area Dapur Rumah Modern]" class="gallery-img" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gagal+Muat';">
+            </a>
+            <!-- Tambahkan lebih banyak gambar dengan format yang sama -->
+            <a href="https://placehold.co/1200x800/a3bffa/333?text=Rumah+Modern+Taman+Belakang" data-lightbox="proyek-rumah-modern" data-title="Taman Belakang">
+                <img src="https://placehold.co/600x400/a3bffa/333?text=Rumah+Modern+Taman+Belakang" alt="[Gambar Taman Belakang Rumah Modern]" class="gallery-img" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gagal+Muat';">
+            </a>
+            <a href="https://placehold.co/1200x800/a3bffa/333?text=Rumah+Modern+Detail+Fasad" data-lightbox="proyek-rumah-modern" data-title="Detail Fasad Bangunan">
+                <img src="https://placehold.co/600x400/a3bffa/333?text=Rumah+Modern+Detail+Fasad" alt="[Gambar Detail Fasad Rumah Modern]" class="gallery-img" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/333?text=Gagal+Muat';">
+            </a>
+        </div>
+
+        <div class="back-button-container">
+            <!-- Arahkan kembali ke bagian portfolio di index.html -->
+            <a href="indek.html" class="back-button"><i class="fas fa-arrow-left mr-2"></i>Kembali ke Portfolio</a>
+        </div>
+    </main>
+
+    <footer class="footer-galeri">
+        <p>&copy; <span id="currentYearGallery"></span> Portofolio D. Solichan</p>
+    </footer>
+
+    <!-- Skrip untuk Lightbox dan tahun -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        lightbox.option({
+          'resizeDuration': 200,
+          'wrapAround': true,
+          'alwaysShowNavOnTouchDevices': true,
+          'disableScrolling': true
+        });
+        document.getElementById('currentYearGallery').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>

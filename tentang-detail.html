@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Saya Lebih Detail - D. Solichan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6; /* Warna abu-abu muda yang lebih netral */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header-detail {
+            background-color: #4F46E5; /* Indigo */
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header-detail h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .content-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .content-container h2 {
+            /* Menggunakan class Tailwind */
+            @apply text-2xl font-semibold text-gray-800 mb-4 border-b pb-2;
+        }
+        .content-container p, .content-container ul {
+            @apply text-gray-700 leading-relaxed mb-4;
+        }
+        .profile-image-detail {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px auto;
+            display: block;
+            border: 4px solid #4F46E5;
+        }
+        /* Style khusus untuk list pengalaman kerja */
+        .experience-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .experience-list li {
+            margin-bottom: 20px;
+            padding-left: 25px;
+            position: relative;
+        }
+        .experience-list li::before {
+            content: '\f0b1'; /* Icon koper dari Font Awesome */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #4F46E5;
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+        .experience-list strong {
+            display: block;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .experience-list span {
+            font-size: 0.9em;
+            color: #6b7280;
+        }
+        .experience-list p {
+            margin-top: 4px;
+            margin-bottom: 0;
+        }
+        /* Style untuk list keahlian dan misi */
+        .custom-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .custom-list li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        .custom-list li::before {
+            content: '\f00c'; /* Icon centang dari Font Awesome */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #10B981; /* Warna hijau */
+            position: absolute;
+            left: 0;
+        }
+        .back-button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #4F46E5; /* Indigo */
+            color: white; /* Diubah menjadi putih agar kontras */
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #4338CA; /* Darker Indigo */
+        }
+        .footer-detail {
+            background-color: #1f2937; /* Warna abu-abu gelap */
+            color: #d1d5db;
+            text-align: center;
+            padding: 15px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-detail">
+        <h1>Lebih Dekat Dengan Solichan</h1>
+    </header>
+
+    <div class="content-container">
+        <img src="profil saya.jpg" alt="Foto D. Solichan" class="profile-image-detail" onerror="this.onerror=null;this.src='https://placehold.co/200x200/e2e8f0/333?text=Foto+Tidak+Tersedia';">
+
+        <h2>Filosofi Desain Saya</h2>
+        <p>
+            Saya percaya bahwa sebuah desain yang hebat tidak berhenti di gambar 2D. Filosofi saya adalah menerjemahkan visi dan denah teknis menjadi sebuah pengalaman visual yang hidup. Saya berfokus untuk menciptakan visualisasi 3D yang fotorealistis dan imersif, sehingga klien dapat merasakan ruang dan suasana bangunan sebelum proses konstruksi dimulai.
+        </p>
+
+        <h2>Perjalanan & Pengalaman Profesional</h2>
+        <p>
+            Dengan pengalaman lebih dari 10 tahun yang dimulai dari pengawasan lapangan hingga spesialisasi dalam desain 3D, saya memiliki pemahaman unik yang menggabungkan aspek teknis, estetika, dan anggaran. Fondasi kuat dari proyek konstruksi besar memberi saya kemampuan untuk menciptakan desain yang tidak hanya indah, tetapi juga realistis dan dapat dibangun.
+        </p>
+        <p>
+            Kombinasi pengalaman lapangan dan keahlian digital ini membuat saya sangat mahir dalam menyusun <strong>Rencana Anggaran Biaya (RAB)</strong> yang akurat, karena saya memahami material, proses kerja, dan detail teknis yang diperlukan.
+        </p>
+        
+        <ul class="experience-list">
+            <li>
+                <strong>3D Designer - PT Mitra Suaka Gemilang (Warteg New Bahari)</strong>
+                <span>2022 - 2024</span>
+                <p>Merancang interior dengan fokus pada ergonomi dan estetika untuk menciptakan ruang yang nyaman bagi pelanggan.</p>
+            </li>
+            <li>
+                <strong>Desain 3D dan Perencana - PT Abiprana Wangun Karsa</strong>
+                <span>2021 - 2022</span>
+                <p>Berkolaborasi dengan tim arsitek dan engineer, menghasilkan desain yang memenuhi standar teknis dan kebutuhan klien.</p>
+            </li>
+            <li>
+                <strong>Pengawas Lapangan & Desain 3D - PT Cakra Globalindo Utama</strong>
+                <span>2020 - 2021</span>
+                <p>Menggabungkan aspek teknis dan estetika dalam desain 3D serta meningkatkan koordinasi proyek.</p>
+            </li>
+            <li>
+                <strong>Desainer 3D/2D & Estimator - PT Jaya Bangun Interindo</strong>
+                <p>Bertanggung jawab atas desain 3D & 2D, survey pengukuran lokasi, dan penyusunan estimasi biaya proyek.</p>
+            </li>
+             <li>
+                <strong>Pengawas Lapangan Struktur - PT Adhi Karya (Persero) Tbk</strong>
+                <span>2013 - 2015</span>
+                <p>Memperoleh pemahaman mendalam tentang standar keselamatan kerja dan peraturan dalam pengawasan proyek konstruksi skala besar.</p>
+            </li>
+            <li>
+                <strong>Desainer 3D Freelance</strong>
+                <p>Mengerjakan berbagai proyek desain 3D untuk klien perorangan dan perusahaan (CV), seperti CV. HK Barokah dan CV. Metland Bekasi.</p>
+            </li>
+        </ul>
+
+        <h2>Keahlian Utama</h2>
+        <ul class="custom-list">
+            <li><strong>Visualisasi & Rendering 3D:</strong> Lumion, V-Ray, Enscape, SketchUp.</li>
+            <li><strong>Desain Teknis & Estimasi Biaya:</strong> AutoCAD, Microsoft Excel untuk penyusunan Rencana Anggaran Biaya (RAB).</li>
+            <li><strong>Manajemen & Koordinasi Proyek</strong></li>
+            <li><strong>Konsultasi Desain Interior dan Eksterior</strong></li>
+        </ul>
+        
+        <h2>Visi & Misi</h2>
+        <p>
+            <strong>Visi:</strong> Menjadi mitra visualisasi dan perancangan yang andal, mampu memberikan solusi desain yang inovatif dan terukur.
+        </p>
+        <p>
+            <strong>Misi:</strong>
+        </p>
+        <ul class="custom-list">
+            <li>Menghadirkan visualisasi 3D berkualitas tinggi yang fungsional dan sesuai dengan anggaran klien.</li>
+            <li>Memanfaatkan teknologi rendering terdepan (Lumion, V-Ray, Enscape) untuk hasil yang maksimal.</li>
+            <li>Menyediakan estimasi biaya (RAB) yang transparan dan akurat.</li>
+            <li>Menjalin komunikasi yang baik dan berkontribusi pada proyek yang bertanggung jawab.</li>
+        </ul>
+
+        <div class="back-button-container">
+            <a href="index.html" class="back-button"><i class="fas fa-arrow-left mr-2"></i>Kembali ke Portfolio</a>
+        </div>
+    </div>
+
+    <footer class="footer-detail">
+        <p>&copy; <span id="currentYearDetailAbout"></span> Portofolio D. Solichan</p>
+    </footer>
+
+    <script>
+        document.getElementById('currentYearDetailAbout').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
