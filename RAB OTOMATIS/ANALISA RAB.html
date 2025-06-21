@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi RAB Profesional (Manajemen Data)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-image: linear-gradient(to bottom right, #f0f4f9, #e2e8f0); }
+        .card { background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .table-container { max-height: 60vh; overflow-y: auto; }
+        .nav-tab { cursor: pointer; padding: 0.5rem 1rem; border-bottom: 2px solid transparent; }
+        .nav-tab.active { border-color: #3b82f6; color: #1e40af; font-weight: 600; }
+        .view { display: none; }
+        .view.active { display: block; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="mb-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Aplikasi RAB Profesional</h1>
+            <p class="text-slate-600 mt-2 text-lg">Dilengkapi dengan Panel Manajemen Data Anda Sendiri.</p>
+        </header>
+
+        <!-- TOMBOL BARU DITAMBAHKAN DI SINI -->
+            <div class="mt-6 flex justify-center items-center gap-4">
+                <a href="\Index.html" class="px-5 py-2 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 text-sm transition-colors shadow-md">
+                    &larr; Kembali ke Portofolio
+                </a>
+                <a href="RAB OTOMATIS.html" class="px-5 py-2 bg-sky-600 text-white rounded-lg font-semibold hover:bg-sky-700 text-sm transition-colors shadow-md">
+                    Kembali ke RAB ANDA &rarr;
+                </a>
+            </div>
+            <!-- AKHIR BAGIAN TOMBOL BARU -->
+        <!-- Navigasi Tab -->
+        <div class="mb-6 border-b border-slate-300 flex justify-center">
+            <div id="tab-kalkulator" class="nav-tab active">Kalkulator RAB</div>
+            <div id="tab-manajemen" class="nav-tab">Manajemen Data</div>
+        </div>
+
+        <!-- Tampilan Kalkulator RAB -->
+        <div id="view-kalkulator" class="view active">
+            <!-- Konten Kalkulator RAB akan diisi oleh JS dari template -->
+        </div>
+
+        <!-- Tampilan Manajemen Data -->
+        <div id="view-manajemen" class="view">
+            <div class="space-y-8">
+                <div class="text-center p-4 bg-blue-100 border border-blue-300 text-blue-800 rounded-lg">
+                    <p class="font-semibold">Selamat Datang di Panel Manajemen Data!</p>
+                    <p class="text-sm">Di sini Anda bisa mengatur semua data master untuk perhitungan RAB. Data akan tersimpan di browser Anda.</p>
+                </div>
+                <!-- Manajemen Material & Upah -->
+                <div class="card p-6 rounded-xl shadow-lg">
+                    <h2 class="text-xl font-semibold text-slate-700 mb-4">1. Manajemen Material & Upah</h2>
+                    <div class="grid md:grid-cols-4 gap-4 mb-4">
+                        <input type="text" id="input-nama-item" placeholder="Nama Item (cth: Semen)" class="p-2 border rounded">
+                        <input type="number" id="input-harga-item" placeholder="Harga" class="p-2 border rounded">
+                        <input type="text" id="input-satuan-item" placeholder="Satuan (cth: sak)" class="p-2 border rounded">
+                        <select id="select-tipe-item" class="p-2 border rounded bg-white">
+                            <option value="material">Material</option>
+                            <option value="upah">Upah</option>
+                        </select>
+                    </div>
+                    <button id="btn-simpan-item" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">Tambah ke Daftar</button>
+                    <hr class="my-6">
+                    <h3 class="font-semibold mb-2">Daftar Material & Upah Tersimpan:</h3>
+                    <div class="table-container max-h-48">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-100 sticky top-0"><tr><th class="p-2 text-left">Nama</th><th class="p-2 text-left">Tipe</th><th class="p-2 text-right">Harga</th><th class="p-2 text-center">Aksi</th></tr></thead>
+                            <tbody id="tabel-item"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Manajemen Analisa Harga Satuan (AHS) -->
+                <div class="card p-6 rounded-xl shadow-lg">
+                    <h2 class="text-xl font-semibold text-slate-700 mb-4">2. Manajemen Analisa Harga Satuan (AHS)</h2>
+                     <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                             <h3 class="font-semibold mb-2">Buat Jenis Pekerjaan Baru</h3>
+                             <div class="space-y-3">
+                                <input type="text" id="input-nama-pekerjaan" placeholder="Nama Pekerjaan (cth: Pasangan Dinding)" class="w-full p-2 border rounded">
+                                <input type="text" id="input-satuan-pekerjaan" placeholder="Satuan (cth: m²)" class="w-full p-2 border rounded">
+                                <button id="btn-simpan-pekerjaan" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700">Simpan Jenis Pekerjaan</button>
+                             </div>
+                        </div>
+                        <div>
+                             <h3 class="font-semibold mb-2">Rakit Analisa (Resep)</h3>
+                             <div class="space-y-3">
+                                 <select id="select-pekerjaan-ahs" class="w-full p-2 border rounded bg-white"><option>Pilih Pekerjaan untuk Dirakit</option></select>
+                                 <select id="select-komponen-ahs" class="w-full p-2 border rounded bg-white"><option>Pilih Komponen (Bahan/Upah)</option></select>
+                                 <input type="number" id="input-koefisien-ahs" placeholder="Koefisien" class="w-full p-2 border rounded">
+                                 <button id="btn-tambah-komponen" class="w-full px-4 py-2 bg-sky-600 text-white rounded-lg font-semibold hover:bg-sky-700">Tambah Komponen ke Analisa</button>
+                             </div>
+                        </div>
+                     </div>
+                     <hr class="my-6">
+                     <h3 class="font-semibold mb-2">Detail Analisa Pekerjaan Tersimpan:</h3>
+                     <div id="kontainer-detail-ahs" class="space-y-4">
+                        <p class="text-slate-500 text-center">Pilih sebuah pekerjaan dari dropdown "Rakit Analisa" untuk melihat detailnya di sini.</p>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <template id="template-kalkulator">
+        <div class="space-y-8">
+            <div class="card p-4 rounded-xl shadow-lg flex justify-end items-center gap-4">
+                <h2 class="text-lg font-semibold text-slate-700 mr-auto">Opsi Ekspor:</h2>
+                <button id="export-excel-btn" class="px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 text-sm">Ekspor Excel</button>
+                <button id="export-pdf-btn" class="px-4 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 text-sm">Ekspor PDF</button>
+            </div>
+            <div class="card p-6 rounded-xl shadow-lg">
+                <h2 class="text-xl font-semibold mb-4 border-b border-slate-200 pb-2 text-slate-700">1. Informasi Proyek</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <input type="text" id="project-name" placeholder="Nama Proyek" class="w-full p-3 bg-white/50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400">
+                    <input type="text" id="client-name" placeholder="Nama Klien" class="w-full p-3 bg-white/50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400">
+                    <input type="text" id="lokasi-proyek" placeholder="Ketik manual lokasi" class="w-full p-3 bg-white/50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 md:col-span-2">
+                    <input type="date" id="project-date" class="w-full p-3 bg-white/50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-500">
+                </div>
+            </div>
+            <div class="card p-6 rounded-xl shadow-lg">
+                <div class="flex flex-wrap justify-between items-center mb-4 border-b border-slate-200 pb-2">
+                    <h2 class="text-xl font-semibold text-slate-700">2. Rincian Anggaran Biaya (RAB)</h2>
+                    <button id="add-row-btn-kalkulator" class="px-5 py-2 bg-gradient-to-br from-sky-500 to-cyan-400 text-white rounded-lg font-semibold hover:from-sky-600 hover:to-cyan-500 transition shadow-md hover:shadow-lg flex items-center space-x-2 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                        <span>Pilih Pekerjaan</span>
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-100 sticky top-0"><tr><th class="p-3 font-semibold tracking-wide">No.</th><th class="p-3 font-semibold tracking-wide w-2/5">Uraian Pekerjaan</th><th class="p-3 font-semibold tracking-wide w-1/4">Spesifikasi</th><th class="p-3 font-semibold tracking-wide text-center">Volume</th><th class="p-3 font-semibold tracking-wide text-center">Satuan</th><th class="p-3 font-semibold tracking-wide text-right">Harga Satuan (Rp)</th><th class="p-3 font-semibold tracking-wide text-right">Jumlah Harga (Rp)</th><th class="p-3 font-semibold tracking-wide text-center">Aksi</th></tr></thead>
+                        <tbody id="rab-table-body-kalkulator" class="divide-y divide-slate-200"><tr id="empty-row-kalkulator"><td class="p-4 text-slate-400 italic text-center" colspan="8">Klik tombol "Pilih Pekerjaan" untuk memulai.</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+             <div class="grid md:grid-cols-5 gap-8">
+                <div class="md:col-span-3"></div>
+                <div class="md:col-span-2 card p-6 rounded-xl shadow-lg">
+                    <h2 class="text-xl font-semibold mb-4 border-b border-slate-200 pb-2 text-slate-700">Rekapitulasi</h2>
+                    <div class="space-y-3">
+                        <div class="flex justify-between"><span class="text-slate-600">Total Biaya</span><span id="total-biaya-kalkulator" class="font-semibold text-slate-900">Rp 0</span></div>
+                        <div class="flex justify-between items-center"><span class="text-slate-600">PPN</span><div class="flex items-center space-x-2"><input type="number" id="ppn-input-kalkulator" value="11" class="w-16 p-1 bg-white/50 border border-slate-300 rounded-md text-center"><span>%</span></div></div>
+                        <div class="flex justify-between"><span></span><span id="total-ppn-kalkulator" class="font-semibold text-slate-900">Rp 0</span></div>
+                        <hr class="my-2 border-slate-200"><div class="flex justify-between text-lg"><span class="font-bold">Grand Total</span><span id="grand-total-kalkulator" class="font-bold text-sky-600">Rp 0</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- HELPER FUNCTIONS ---
+        const formatRupiah = (number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number || 0);
+        const parseRupiah = (str) => parseFloat(String(str).replace(/[^0-9]/g, '')) || 0;
+
+        // --- DATABASE ---
+        let db = {
+            items: {}, // Untuk material & upah
+            jobTypes: {}, // Untuk jenis pekerjaan
+            ahs: {} // Untuk analisa
+        };
+
+        // --- DOM Elements ---
+        const tabKalkulator = document.getElementById('tab-kalkulator');
+        const tabManajemen = document.getElementById('tab-manajemen');
+        const viewKalkulator = document.getElementById('view-kalkulator');
+        const viewManajemen = document.getElementById('view-manajemen');
+
+        // Manajemen Data Elements
+        const inputNamaItem = document.getElementById('input-nama-item');
+        const inputHargaItem = document.getElementById('input-harga-item');
+        const inputSatuanItem = document.getElementById('input-satuan-item');
+        const selectTipeItem = document.getElementById('select-tipe-item');
+        const btnSimpanItem = document.getElementById('btn-simpan-item');
+        const tabelItem = document.getElementById('tabel-item');
+        const inputNamaPekerjaan = document.getElementById('input-nama-pekerjaan');
+        const inputSatuanPekerjaan = document.getElementById('input-satuan-pekerjaan');
+        const btnSimpanPekerjaan = document.getElementById('btn-simpan-pekerjaan');
+        const selectPekerjaanAHS = document.getElementById('select-pekerjaan-ahs');
+        const selectKomponenAHS = document.getElementById('select-komponen-ahs');
+        const inputKoefisienAHS = document.getElementById('input-koefisien-ahs');
+        const btnTambahKomponen = document.getElementById('btn-tambah-komponen');
+        const kontainerDetailAHS = document.getElementById('kontainer-detail-ahs');
+
+        // --- FUNGSI DATABASE (LocalStorage) ---
+        const saveDb = () => localStorage.setItem('rabProDatabase', JSON.stringify(db));
+        const loadDb = () => {
+            const data = localStorage.getItem('rabProDatabase');
+            if (data) {
+                db = JSON.parse(data);
+            } else {
+                // Pre-fill data jika kosong
+                db = {
+                    items: {'mat_1':{name:'Semen', price:75000, unit:'sak', type:'material'}, 'upah_1':{name:'Tukang', price:150000, unit:'OH', type:'upah'}},
+                    jobTypes: {'job_1':{name:'Pekerjaan Contoh', unit:'m²'}},
+                    ahs: {'job_1':[{itemId:'mat_1', koef:1}, {itemId:'upah_1', koef:0.5}]}
+                };
+                saveDb();
+            }
+        };
+
+        // --- FUNGSI RENDER (Panel Manajemen) ---
+        const renderTabelItem = () => {
+            tabelItem.innerHTML = '';
+            Object.keys(db.items).forEach(id => {
+                const item = db.items[id];
+                const row = tabelItem.insertRow();
+                row.innerHTML = `<td class="p-2">${item.name}</td><td class="p-2 capitalize">${item.type}</td><td class="p-2 text-right">${formatRupiah(item.price)}</td><td class="p-2 text-center"><button class="text-red-500 delete-item-btn" data-id="${id}">Hapus</button></td>`;
+            });
+        };
+        const renderDropdownPekerjaanAHS = () => {
+            selectPekerjaanAHS.innerHTML = '<option value="">-- Pilih Pekerjaan --</option>';
+            Object.keys(db.jobTypes).forEach(id => {
+                selectPekerjaanAHS.innerHTML += `<option value="${id}">${db.jobTypes[id].name}</option>`;
+            });
+        };
+        const renderDropdownKomponenAHS = () => {
+            selectKomponenAHS.innerHTML = '<option value="">-- Pilih Komponen --</option>';
+            Object.keys(db.items).forEach(id => {
+                selectKomponenAHS.innerHTML += `<option value="${id}">${db.items[id].name} (${db.items[id].type})</option>`;
+            });
+        };
+        const renderDetailAHS = (jobId) => {
+            if (!jobId || !db.jobTypes[jobId]) {
+                kontainerDetailAHS.innerHTML = `<p class="text-slate-500 text-center">Pilih pekerjaan untuk melihat atau merakit analisanya.</p>`;
+                return;
+            }
+            const job = db.jobTypes[jobId];
+            let html = `<div class="p-4 border rounded-lg bg-slate-50"><h4 class="font-bold text-lg">${job.name}</h4><p class="text-sm text-slate-600 mb-2">Satuan: ${job.unit}</p><ul>`;
+            const analisa = db.ahs[jobId] || [];
+            if (analisa.length === 0) {
+                html += `<li class="text-sm text-red-600">Belum ada komponen analisa untuk pekerjaan ini.</li>`;
+            } else {
+                analisa.forEach((komponen, index) => {
+                    const item = db.items[komponen.itemId];
+                    if(item) {
+                        html += `<li class="flex justify-between items-center text-sm py-1 border-b"><span>${item.name}</span><div><span class="font-mono">${komponen.koef}</span><span class="text-slate-500 mx-2">${item.unit}</span><button class="text-red-500 delete-komponen-btn" data-job-id="${jobId}" data-index="${index}">x</button></div></li>`;
+                    }
+                });
+            }
+            html += `</ul></div>`;
+            kontainerDetailAHS.innerHTML = html;
+        };
+
+        const renderAllManagement = () => {
+            renderTabelItem();
+            renderDropdownPekerjaanAHS();
+            renderDropdownKomponenAHS();
+            renderDetailAHS(selectPekerjaanAHS.value);
+        };
+        
+        // --- FUNGSI LOGIC (Panel Manajemen) ---
+        const simpanItem = () => {
+            const name = inputNamaItem.value.trim(); const price = parseFloat(inputHargaItem.value); const unit = inputSatuanItem.value.trim(); const type = selectTipeItem.value;
+            if (!name || !price || !unit) { alert("Harap isi semua kolom untuk item."); return; }
+            const id = `${type.slice(0,3)}_${Date.now()}`;
+            db.items[id] = { name, price, unit, type };
+            saveDb(); renderAllManagement();
+            inputNamaItem.value = ''; inputHargaItem.value = ''; inputSatuanItem.value = '';
+        };
+        const simpanPekerjaan = () => {
+            const name = inputNamaPekerjaan.value.trim(); const unit = inputSatuanPekerjaan.value.trim();
+            if(!name || !unit) { alert("Harap isi nama dan satuan pekerjaan."); return; }
+            const id = `job_${Date.now()}`;
+            db.jobTypes[id] = { name, unit };
+            if(!db.ahs[id]) { db.ahs[id] = []; }
+            saveDb(); renderAllManagement();
+            inputNamaPekerjaan.value = ''; inputSatuanPekerjaan.value = '';
+        };
+        const tambahKomponen = () => {
+            const jobId = selectPekerjaanAHS.value; const itemId = selectKomponenAHS.value; const koef = parseFloat(inputKoefisienAHS.value);
+            if(!jobId || !itemId || !koef) { alert("Harap pilih pekerjaan, komponen, dan isi koefisien."); return; }
+            db.ahs[jobId].push({ itemId, koef });
+            saveDb(); renderDetailAHS(jobId); inputKoefisienAHS.value = '';
+        };
+
+        // --- Inisialisasi Kalkulator & Event Listeners ---
+        const setupKalkulator = () => {
+            if (viewKalkulator.innerHTML.trim() !== '') return; // Hanya setup sekali
+            const template = document.getElementById('template-kalkulator');
+            const clone = template.content.cloneNode(true);
+            viewKalkulator.appendChild(clone);
+
+            const rabTableBody = viewKalkulator.querySelector('#rab-table-body-kalkulator');
+            const ppnInput = viewKalkulator.querySelector('#ppn-input-kalkulator');
+            const totalBiayaEl = viewKalkulator.querySelector('#total-biaya-kalkulator');
+            const totalPpnEl = viewKalkulator.querySelector('#total-ppn-kalkulator');
+            const grandTotalEl = viewKalkulator.querySelector('#grand-total-kalkulator');
+
+            const calculateTotalsKalkulator = () => {
+                let subtotal = 0;
+                rabTableBody.querySelectorAll('tr[data-job-id]').forEach(row => { subtotal += parseRupiah(row.cells[6].textContent); });
+                const ppnPercentage = parseFloat(ppnInput.value) || 0;
+                const ppnAmount = subtotal * (ppnPercentage / 100);
+                const grandTotal = subtotal + ppnAmount;
+                totalBiayaEl.textContent = formatRupiah(subtotal);
+                totalPpnEl.textContent = formatRupiah(ppnAmount);
+                grandTotalEl.textContent = formatRupiah(grandTotal);
+            };
+
+            const calculateAhsPrice = (jobId) => {
+                const analisa = db.ahs[jobId] || [];
+                let totalPrice = 0;
+                analisa.forEach(komponen => {
+                    const item = db.items[komponen.itemId];
+                    if (item) { totalPrice += item.price * komponen.koef; }
+                });
+                return totalPrice;
+            };
+
+            const updateRowCalculation = (row) => {
+                const jobId = row.getAttribute('data-job-id'); if (!jobId) return;
+                const hargaSatuan = calculateAhsPrice(jobId);
+                row.cells[5].textContent = formatRupiah(hargaSatuan);
+                const volume = parseFloat(row.querySelector('.volume-input').value) || 0;
+                row.cells[6].textContent = formatRupiah(volume * hargaSatuan);
+                calculateTotalsKalkulator();
+            };
+
+            const handleJobChange = (selectElement) => {
+                const row = selectElement.closest('tr');
+                const selectedId = selectElement.value;
+                row.setAttribute('data-job-id', selectedId);
+                const specCell = row.cells[2];
+                const jobData = db.jobTypes[selectedId];
+                if (jobData) {
+                    row.cells[4].textContent = jobData.unit;
+                    const analisa = db.ahs[selectedId] || [];
+                    specCell.innerHTML = analisa.map(k => db.items[k.itemId]?.name || '').join(', ');
+                } else {
+                    row.cells[4].textContent = '-';
+                    specCell.innerHTML = '';
+                }
+                updateRowCalculation(row);
+            };
+
+            const addRowKalkulator = () => {
+                viewKalkulator.querySelector('#empty-row-kalkulator')?.remove();
+                const newRow = rabTableBody.insertRow();
+                const rowCount = rabTableBody.rows.length;
+                newRow.innerHTML = `<td class="p-2">${rowCount}</td><td class="p-1"><select class="job-select w-full p-2 border rounded"><option value="">-- Pilih --</option></select></td><td class="p-2 text-xs"></td><td class="p-1"><input type="number" class="volume-input w-full p-2 border rounded text-center" value="1"></td><td class="p-2 text-center"></td><td class="p-2 text-right"></td><td class="p-2 text-right font-semibold"></td><td class="p-2 text-center"><button class="delete-btn text-red-500">Hapus</button></td>`;
+                const jobSelect = newRow.querySelector('.job-select');
+                Object.keys(db.jobTypes).forEach(id => {
+                    jobSelect.innerHTML += `<option value="${id}">${db.jobTypes[id].name}</option>`;
+                });
+                jobSelect.addEventListener('change', () => handleJobChange(jobSelect));
+                newRow.querySelector('.volume-input').addEventListener('input', () => updateRowCalculation(newRow));
+                newRow.querySelector('.delete-btn').addEventListener('click', () => { newRow.remove(); calculateTotalsKalkulator(); });
+            };
+
+            viewKalkulator.querySelector('#add-row-btn-kalkulator').addEventListener('click', addRowKalkulator);
+            ppnInput.addEventListener('input', calculateTotalsKalkulator);
+
+            viewKalkulator.querySelector('#export-pdf-btn').addEventListener('click', () => {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                const head = [['No.', 'Uraian Pekerjaan', 'Volume', 'Satuan', 'Harga Satuan', 'Jumlah Harga']];
+                const body = [];
+                rabTableBody.querySelectorAll('tr[data-job-id]').forEach(row => {
+                    const jobSelect = row.querySelector('.job-select');
+                    body.push([
+                        row.cells[0].innerText,
+                        jobSelect.options[jobSelect.selectedIndex].text,
+                        row.querySelector('.volume-input').value,
+                        row.cells[4].innerText,
+                        row.cells[5].innerText,
+                        row.cells[6].innerText,
+                    ]);
+                });
+                doc.autoTable({ head, body });
+                doc.save('RAB.pdf');
+            });
+            viewKalkulator.querySelector('#export-excel-btn').addEventListener('click', () => {
+                 const data = [['No.', 'Uraian Pekerjaan', 'Volume', 'Satuan', 'Harga Satuan', 'Jumlah Harga']];
+                 rabTableBody.querySelectorAll('tr[data-job-id]').forEach(row => {
+                    const jobSelect = row.querySelector('.job-select');
+                    data.push([
+                        row.cells[0].innerText,
+                        jobSelect.options[jobSelect.selectedIndex].text,
+                        row.querySelector('.volume-input').value,
+                        row.cells[4].innerText,
+                        row.cells[5].innerText,
+                        row.cells[6].innerText,
+                    ]);
+                 });
+                const ws = XLSX.utils.aoa_to_sheet(data);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "RAB");
+                XLSX.writeFile(wb, "RAB.xlsx");
+            });
+
+        };
+        
+        // --- EVENT LISTENERS GLOBAL ---
+        loadDb();
+        renderAllManagement();
+        setupKalkulator();
+
+        tabKalkulator.addEventListener('click', () => {
+            tabManajemen.classList.remove('active');
+            tabKalkulator.classList.add('active');
+            viewManajemen.classList.remove('active');
+            viewKalkulator.classList.add('active');
+            setupKalkulator(); // Re-run to ensure dropdowns are populated with latest data
+        });
+
+        tabManajemen.addEventListener('click', () => {
+            tabKalkulator.classList.remove('active');
+            tabManajemen.classList.add('active');
+            viewKalkulator.classList.remove('active');
+            viewManajemen.classList.add('active');
+        });
+        
+        btnSimpanItem.addEventListener('click', simpanItem);
+        btnSimpanPekerjaan.addEventListener('click', simpanPekerjaan);
+        btnTambahKomponen.addEventListener('click', tambahKomponen);
+        selectPekerjaanAHS.addEventListener('change', () => renderDetailAHS(selectPekerjaanAHS.value));
+        
+        tabelItem.addEventListener('click', (e) => {
+            if(e.target.classList.contains('delete-item-btn')) {
+                const id = e.target.dataset.id;
+                if(confirm(`Yakin ingin menghapus item "${db.items[id].name}"?`)){
+                    delete db.items[id];
+                    saveDb();
+                    renderAllManagement();
+                }
+            }
+        });
+
+         kontainerDetailAHS.addEventListener('click', (e) => {
+            if(e.target.classList.contains('delete-komponen-btn')) {
+                const jobId = e.target.dataset.jobId;
+                const index = e.target.dataset.index;
+                db.ahs[jobId].splice(index, 1);
+                saveDb();
+                renderDetailAHS(jobId);
+            }
+        });
+    });
+    </script>
+</body>
+</html>
