@@ -1,0 +1,94 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.galeri-3d {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.item-3d {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.item-3d:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.item-3d a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding-bottom: 15px; /* Padding bawah untuk teks */
+}
+
+.item-3d img {
+    width: 100%;
+    height: 200px; /* Tinggi tetap untuk thumbnail */
+    object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
+    display: block; /* Menghilangkan spasi bawah gambar */
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px; /* Margin bawah setelah gambar */
+}
+
+.item-3d h3 {
+    margin: 0 15px 5px 15px;
+    color: #0056b3;
+}
+
+.item-3d p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0 15px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: #333;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .galeri-3d {
+        grid-template-columns: 1fr; /* Satu kolom di layar kecil */
+    }
+}
